@@ -1,22 +1,34 @@
 package blackjack.domain.person;
 
+import blackjack.domain.card.CardFactory;
 import blackjack.domain.card.Cards;
 
 public abstract class Person {
-    private static final int MAX_NUM = 21;
-    private static Cards cards;
+    protected static final int MAX_NUM = 21;
+    protected final Cards cards = new Cards();
+    private Status status = Status.PROCESSING;
 
     protected int getTotal() {
         return cards.getTotal();
     }
 
-    public void getMoreCard() {
-        cards.getMoreCard();
+    public void changeStatus(Status status) {
+        this.status = status;
     }
 
-    public Boolean exceedMAX() {
-        return this.getTotal() > MAX_NUM;
+    public Status getStatus() {
+        return status;
+    }
+    public void initCards(CardFactory cardFactory) throws Exception {
+        cards.getMoreCard(cardFactory);
+        cards.getMoreCard(cardFactory);
     }
 
+    public void getMoreCard(CardFactory cardFactory) throws Exception {
+        cards.getMoreCard(cardFactory);
+    }
 
+    public abstract boolean needMoreCard();
+
+    public abstract String getAllCards();
 }

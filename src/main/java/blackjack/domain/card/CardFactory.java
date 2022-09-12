@@ -6,26 +6,28 @@ import java.util.List;
 import java.util.Random;
 
 public class CardFactory {
-    private final List<String> cardPool;
+    private final List<Card> cardPool;
 
     public CardFactory() {
-        this.cardPool = new ArrayList<>();
-        makeCardPool();
+        this.cardPool = initCardPool();
     }
 
-    private void makeCardPool() {
+    protected List<Card> initCardPool() {
+        List<Card> cardList = new ArrayList<>();
         List<String> figures = Arrays.asList("스페이드", "클로버", "하트", "다이아몬드");
-        List<String> values = Arrays.asList("2","3","4","5","6","7","8","9","K","Q","J","A");
+        List<Character> numbers = Arrays.asList('2','3','4','5','6','7','8','9','K','Q','J','A');
         for (String figure:figures) {
-            for (String value:values) {
-                this.cardPool.add(value+figure);
+            for (Character number:numbers) {
+                cardList.add(new Card(figure, number));
             }
         }
+        return cardList;
     }
 
-    public Card createCard(){
+    public Card selectCard(){
         int index = new Random().nextInt(this.cardPool.size());
-        String card = cardPool.get(index);
-        return new Card(card);
+        Card card = cardPool.get(index);
+        cardPool.remove(index);
+        return card;
     }
 }
