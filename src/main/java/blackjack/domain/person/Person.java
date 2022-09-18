@@ -5,8 +5,15 @@ import blackjack.domain.card.Cards;
 
 public abstract class Person {
     protected static final int MAX_NUM = 21;
-    protected final Cards cards = new Cards();
-    private Status status = Status.PROCESSING;
+    protected final Cards cards;
+    protected double income;
+    private Status status;
+
+    public Person() {
+        this.cards = new Cards();
+        this.income = 0;
+        this.status = Status.PROCESSING;
+    }
 
     protected int getTotal() {
         return cards.getTotal();
@@ -20,8 +27,8 @@ public abstract class Person {
         return status;
     }
     public void initCards(CardFactory cardFactory) throws Exception {
-        cards.getMoreCard(cardFactory);
-        cards.getMoreCard(cardFactory);
+        getMoreCard(cardFactory);
+        getMoreCard(cardFactory);
     }
 
     public void getMoreCard(CardFactory cardFactory) throws Exception {
@@ -31,4 +38,10 @@ public abstract class Person {
     public abstract boolean needMoreCard();
 
     public abstract String getAllCards();
+
+    public abstract String getIncome();
+
+    public void addIncome(double income){
+        this.income += income;
+    }
 }

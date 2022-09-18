@@ -44,16 +44,17 @@ public class Participants {
     }
 
     public void match() {
-
-    }
-
-    public String getAllCards() {
-        String ret = "";
-        ret += dealer.getAllCards()+"\n";
-        for(Player player : players) {
-            ret += player.getAllCards()+"\n";
+        // 딜러가 21 초과시 모든 플레이어 승리
+        if (dealer.getTotal()>21){
+            for(Player player : players) {
+                player.win(dealer);
+                dealer.changeStatus(Status.LOSE);
+            }
         }
-        return ret;
+
+        for(Player player : players) {
+            player.match(dealer);
+        }
     }
 
     public String getResultCards() {
@@ -65,7 +66,12 @@ public class Participants {
         return ret;
     }
 
-    public void getIncomes() {
-
+    public String getIncomes() {
+        String ret = "";
+        ret += dealer.getIncome();
+        for(Player player : players) {
+            ret += player.getIncome();
+        }
+        return ret;
     }
 }

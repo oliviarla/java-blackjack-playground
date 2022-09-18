@@ -22,13 +22,12 @@ public class BlackJackApplication {
         participants.getMoreCard(inputView);
 
         // 모두의 카드 패, 총점 출력
-        System.out.println(participants.getAllCards());
-
         System.out.println(participants.getResultCards());
-//        // 승패 여부 가린 후 최종 수익 계산
-//        participants.match();
-//
-//        // 최종 수익 출력
-//        participants.getIncomes();
+
+        // 승패 여부 가린 후 최종 수익 계산
+        participants.match();
+
+        // 최종 수익 출력
+        System.out.println(participants.getIncomes());
     }
 }

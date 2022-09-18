@@ -5,7 +5,7 @@ import java.util.List;
 
 public class Cards {
     private final List<Card> cardList;
-    private Integer total;
+    private int total;
 
     public Cards() {
         this.cardList = new ArrayList<>();
